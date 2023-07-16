@@ -1,0 +1,101 @@
+/* styles.css */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fafafa;
+}
+
+.App {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+input[type='number'],
+button {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #3897f0;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3578e5;
+}
+
+.result {
+  margin-top: 20px;
+  color: #333;
+  font-size: 18px;
+}
+
+.result div {
+  margin-bottom: 5px;
+}
+
+.result div:last-child {
+  font-weight: bold;
+}
+
+/* Instagram-style buttons */
+.button-instagram {
+  background-color: #3897f0;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button-instagram:hover {
+  background-color: #3578e5;
+}
+
+/* Google search style boxes */
+.google-search-box {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Centered content inside the boxes */
+.google-search-box-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Additional spacing for box elements */
+.google-search-box-content > * {
+  margin-bottom: 10px;
+}
