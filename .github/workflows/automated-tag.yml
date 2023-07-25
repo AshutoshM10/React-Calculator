@@ -1,27 +1,32 @@
-name: Auto Tag on Push
+name: auto_tag
 on:
   push:
     branches:
-      - master
+      - main
+
 jobs:
-  tag_and_push:
+  tag_repo:
+    name: Get runner id and tag the current code snapshot
     runs-on: ubuntu-latest
+
     steps:
-      - name: Set up Git
-        uses: actions/checkout@v2
-      - name: Get Current Date
-        id: date
-        run: echo "CURRENT_DATE=$(date +'%d-%m-%Y')" >> $GITHUB_ENV
+      - uses: actions/checkout@v2
+
       - name: Get Tag Count
         id: tag_count
-        run: echo "TAG_COUNT=$(git tag -l $CURRENT_DATE.* | grep -oP '\d+$' | sort -n | tail -n 1)" >> $GITHUB_ENV
+        run: |
+          TAG_COUNT=$(git tag -l ${{github.run_id}}.* | grep -oP '\d+$' | sort -n | tail -n 1)
+          echo "TAG_COUNT=$TAG_COUNT" >> $GITHUB_ENV
+
       - name: Calculate Revision
         id: calculate_revision
-        run: echo "REVISION=$((TAG_COUNT + 1))" >> $GITHUB_ENV
-        env:
-          TAG_COUNT: ${{ env.TAG_COUNT }}
+        run: |
+          TAG_COUNT=$TAG_COUNT
+          REVISION=$((TAG_COUNT + 1))
+          echo "REVISION=$REVISION" >> $GITHUB_ENV
+
       - name: Create and Push Tag
         run: |
-          new_tag="$CURRENT_DATE.$REVISION"
+          new_tag="${{github.run_id}}.$REVISION"
           git tag $new_tag
           git push origin $new_tag
