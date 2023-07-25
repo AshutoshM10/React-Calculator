@@ -35,7 +35,7 @@ jobs:
 
     - name: Push tag
       run: |
-        git config --global user.name "${{ github.actor }}"
-        git config --global user.email "68manoranjanmohanty@gmail.com"
+        git config --global user.name "GitHub Actions Bot"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git tag ${{ env.NEW_TAG }}
         git push origin ${{ env.NEW_TAG }}
