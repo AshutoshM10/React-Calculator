@@ -22,4 +22,5 @@ jobs:
         run: |
           new_tag="$CURRENT_DATE.$REVISION"
           git tag $new_tag
-          git push origin $new_tag
+          git push origin $new_tag --follow-tags --quiet -u github-actions[bot]:${{ env.PAT_TOKEN }}
+
