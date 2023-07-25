@@ -2,7 +2,7 @@ name: Auto Tag on Push
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   tag_and_push:
     runs-on: ubuntu-latest
@@ -14,16 +14,14 @@ jobs:
         run: echo "CURRENT_DATE=$(date +'%d-%m-%Y')" >> $GITHUB_ENV
       - name: Get Tag Count
         id: tag_count
-        run: echo "TAG_COUNT=$(git tag -l $CURRENT_DATE.* | wc -l)" >> $GITHUB_ENV
+        run: echo "TAG_COUNT=$(git tag -l $CURRENT_DATE.* | grep -oP '\d+$' | sort -n | tail -n 1)" >> $GITHUB_ENV
       - name: Calculate Revision
         id: calculate_revision
         run: echo "REVISION=$((TAG_COUNT + 1))" >> $GITHUB_ENV
-      - name: Create and Push Tag
         env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+          TAG_COUNT: ${{ env.TAG_COUNT }}
+      - name: Create and Push Tag
         run: |
           new_tag="$CURRENT_DATE.$REVISION"
           git tag $new_tag
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git push origin $new_tag --follow-tags --quiet -u github-actions[bot]:$PAT_TOKEN
+          git push origin $new_tag
