@@ -1,32 +1,41 @@
-name: auto_tag
+name: Automated Tagging
+
 on:
   push:
     branches:
       - main
 
 jobs:
-  tag_repo:
-    name: Get runner id and tag the current code snapshot
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
 
-      - name: Get Tag Count
-        id: tag_count
-        run: |
-          TAG_COUNT=$(git tag -l ${{github.run_id}}.* | grep -oP '\d+$' | sort -n | tail -n 1)
-          echo "TAG_COUNT=$TAG_COUNT" >> $GITHUB_ENV
+    - name: Bump tag
+      id: bump_tag
+      run: |
+        TAG_PREFIX=$(date +"%d-%m-%Y")
+        LAST_TAG=$(git tag --list "$TAG_PREFIX.*" --sort=-v:refname | head -n 1)
 
-      - name: Calculate Revision
-        id: calculate_revision
-        run: |
-          TAG_COUNT=$TAG_COUNT
-          REVISION=$((TAG_COUNT + 1))
-          echo "REVISION=$REVISION" >> $GITHUB_ENV
+        if [[ -z "$LAST_TAG" ]]; then
+          echo "No previous tag found for today"
+          NEW_TAG="$TAG_PREFIX.1"
+        else
+          echo "Last tag is $LAST_TAG"
+          LAST_TAG_SUFFIX=${LAST_TAG##*.}
+          NEW_TAG="$TAG_PREFIX.$((LAST_TAG_SUFFIX + 1))"
+        fi
 
-      - name: Create and Push Tag
-        run: |
-          new_tag="${{github.run_id}}.$REVISION"
-          git tag $new_tag
-          git push origin $new_tag
+        echo "New tag will be $NEW_TAG"
+        echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
+
+    - name: Push tag
+      run: |
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "GitHub Actions Bot"
+        git tag ${{ env.NEW_TAG }}
+        git push origin ${{ env.NEW_TAG }}
