@@ -1,0 +1,25 @@
+name: Auto Tag on Push
+on:
+  push:
+    branches:
+      - master
+jobs:
+  tag_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git
+        uses: actions/checkout@v2
+      - name: Get Current Date
+        id: date
+        run: echo "CURRENT_DATE=$(date +'%d-%m-%Y')" >> $GITHUB_ENV
+      - name: Get Tag Count
+        id: tag_count
+        run: echo "TAG_COUNT=$(git tag -l $CURRENT_DATE.* | wc -l)" >> $GITHUB_ENV
+      - name: Calculate Revision
+        id: calculate_revision
+        run: echo "REVISION=$((TAG_COUNT + 1))" >> $GITHUB_ENV
+      - name: Create and Push Tag
+        run: |
+          new_tag="$CURRENT_DATE.$REVISION"
+          git tag $new_tag
+          git push origin $new_tag
