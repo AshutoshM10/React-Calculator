@@ -38,4 +38,5 @@ jobs:
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git config --global user.name "GitHub Actions Bot"
         git tag ${{ env.NEW_TAG }}
-        git push origin ${{ env.NEW_TAG }}
+        git push https://${{secrets.GH_PAT}}@github.com/AshutoshM10/React-Calculator.git $new_tag
+
