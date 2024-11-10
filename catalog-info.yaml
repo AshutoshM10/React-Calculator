@@ -6,7 +6,7 @@ metadata:
   description: |
     This is my react calculator demo application
   links:
-    - title: Innsync App
+    - title: Website
       url: https://www.elivaas.com
     - title: App Gateway INNSYNC
       url: https://api.elivaas.com/swagger-ui/index.html
