@@ -2,7 +2,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: backstage
+  name: ASHUTOSH-REACT-CALCULATOR
   description: |
     This is my react calculator demo application
   links:
