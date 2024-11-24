@@ -9,15 +9,4 @@ spec:
   owner: AshutoshM10
   system: innsync-backend-portal
   definition: |
-    openapi: "3.0.0"
-    info:
-      version: 1.0.0
-      title: INNSYNC API
-      license:
-        name: MIT
-    servers:
-      - url: https://api.elivaas.com
-    paths:
-      /swagger-ui/index.html:
-       
-    ...
+    $text: 'https://api.elivaas.com/v3/api-docs/all'
