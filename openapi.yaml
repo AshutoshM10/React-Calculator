@@ -1,14 +1,24 @@
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: innsync-api-docs
-  description: Retrieve demand side api details
+  name: artist-api
+  description: Retrieve artist details
 spec:
   type: openapi
   lifecycle: production
-  owner: AshutoshM10
-  system: innsync-backend-portal
+  owner: artist-relations-team
+  system: artist-engagement-portal
   definition: |
-    openapi: "3.0.1"
-    $text: "https://api.elivaas.com/v3/api-docs/all"
-  ```
+    openapi: "3.0.0"
+    info:
+      version: 1.0.0
+      title: Artist API
+      license:
+        name: MIT
+    servers:
+      - url: http://artist.spotify.net/v1
+    paths:
+      /artists:
+        get:
+          summary: List all artists
+    ...
