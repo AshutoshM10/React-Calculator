@@ -9,4 +9,5 @@ spec:
   owner: AshutoshM10
   system: innsync-backend-portal
   definition: |
+    openapi: "3.0.1"
     $text: 'https://api.elivaas.com/v3/api-docs/all'
