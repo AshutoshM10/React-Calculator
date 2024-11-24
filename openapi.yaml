@@ -8,6 +8,6 @@ spec:
   lifecycle: production
   owner: AshutoshM10
   system: innsync-backend-portal
-  definition: |
+  definition:
     openapi: "3.0.1"
     $text: 'https://api.elivaas.com/v3/api-docs/all'
