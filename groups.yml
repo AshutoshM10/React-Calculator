@@ -4,11 +4,11 @@ metadata:
   name: infrastructure
   description: The infra business unit
 spec:
-  type: idp-test
+  type: idp-personal
   profile:
-    displayName: Infrastructure
-    email: infrastructure@example.com
-    picture: https://example.com/groups/bu-infrastructure.jpeg
+    displayName: DevOps IDP
+    email: mohantyashutosh234@gmail.com
+    picture: https://media.licdn.com/dms/image/v2/D5603AQGVEISc7-3zzA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1720147059290?e=1738800000&v=beta&t=jeymazVUQ6PNjDNZEhgpAQW6HE84ppDfvWIJ45Mk5vI
   parent: ops
   children: [backstage, other]
-  members: [jdoe]
+  members: [AshutoshM10]
