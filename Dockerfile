@@ -1,5 +1,5 @@
 # Step 1: Use a Node.js base image to build the React app
-FROM node:latest
+FROM node:25.6.0-bookworm
 
 # Set the working directory
 WORKDIR /app
